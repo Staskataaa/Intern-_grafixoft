@@ -24,7 +24,7 @@ namespace Forum_API.Controllers
         public virtual async Task<HttpResponseMessage> CreateAccount(AccountRequest account, 
             string roleDescription = Constants.defaultRoleDescription)
         {
-            await _accountService.CreateAccount(account, roleDescription);
+            await _accountService.CreateAccount(account, roleDescription); 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
@@ -57,6 +57,15 @@ namespace Forum_API.Controllers
         public virtual async Task<IEnumerable<Account>> GetAllAccounts()
         {
             return await _accountService.GetAllAccounts();
+        }
+
+        [HttpGet]
+        [Route("/redirect/")]
+        public RedirectResult Redirect()
+        {
+            RedirectResult redirectResult = new RedirectResult("https://google.com", permanent: true,
+                             preserveMethod: true);
+            return redirectResult;
         }
     }
 }
